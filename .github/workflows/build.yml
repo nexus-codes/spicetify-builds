@@ -21,4 +21,13 @@ jobs:
           git clone https://github.com/khanhas/spicetify-cli
           cd spicetify-cli
           go build -o spicetify.exe
-          zip -r -v build.zip Extensions jsHelper Themes globals.d.ts css-map.json spicetify.exe
+          zip -r -v build.zip Extensions jsHelper Themes globals.d.ts css-map.json spicetify.exe\
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        name: Release
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Daily build"
+          files: spicetify-cli/build.zip
