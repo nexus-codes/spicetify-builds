@@ -1,0 +1,19 @@
+on:
+  schedule:
+    - cron: "0 * * * *"
+name: build
+jobs:
+  build:
+    name: build
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@main
+      - uses: actions/setup-go@v2
+        with:
+          go-version: "1.9.3" # The Go version to download (if necessary) and use.
+      - run: |
+          go version
+          git clone https://github.com/khanhas/spicetify-cli
+          cd spicetify-cli
+          go build -o spicetify.exe
+          dir
