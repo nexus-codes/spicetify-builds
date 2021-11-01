@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: build
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@main
       - uses: actions/setup-go@v2
@@ -21,7 +21,7 @@ jobs:
           git clone https://github.com/khanhas/spicetify-cli
           cd spicetify-cli
           go build -o spicetify.exe
-          zip -r -v build.zip Extensions jsHelper Themes globals.d.ts css-map.json spicetify.exe\
+          tar -a -c -f build.zip Extensions jsHelper Themes globals.d.ts css-map.json spicetify.exe\
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         name: Release
