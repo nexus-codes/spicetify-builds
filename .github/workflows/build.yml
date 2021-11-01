@@ -5,14 +5,16 @@ on:
   push:
     branches: [main]
 
-name: build
 jobs:
   build:
     name: build
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@main
       - uses: actions/setup-go@v2
+        env:
+          GOOS: windows
+          GOARCH: amd64
         with:
           go-version: "^1.9.3" # The Go version to download (if necessary) and use.
       - run: |
@@ -21,3 +23,8 @@ jobs:
           cd spicetify-cli
           go build -o spicetify.exe
           dir
+
+      - uses: papeloto/action-zip@v1
+        with:
+          files: CustomApps, Extensions, jsHelper, Themes, spicetify.exe, globals.d.ts, css-map.json
+          dest: build.zip
