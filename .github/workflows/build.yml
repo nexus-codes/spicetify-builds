@@ -18,13 +18,7 @@ jobs:
         with:
           go-version: "^1.9.3" # The Go version to download (if necessary) and use.
       - run: |
-          go version
           git clone https://github.com/khanhas/spicetify-cli
           cd spicetify-cli
           go build -o spicetify.exe
-          dir
-
-      - uses: papeloto/action-zip@v1
-        with:
-          files: CustomApps, Extensions, jsHelper, Themes, spicetify.exe, globals.d.ts, css-map.json
-          dest: build.zip
+          zip -r -v build.zip Extensions jsHelper Themes globals.d.ts css-map.json spicetify.exe
