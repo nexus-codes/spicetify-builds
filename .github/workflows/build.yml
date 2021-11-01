@@ -19,7 +19,7 @@ jobs:
           cd spicetify-cli
           go build -o spicetify.exe
           dir
-          tar -a -c -f build.zip Extensions jsHelper Themes globals.d.ts css-map.json spicetify.exe\
+          powershell.exe Compress-Archive -Path * -Update -DestinationPath build.zip
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         name: Release
